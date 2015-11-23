@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="myApp">
 <head>
 	<title>Controllers</title>
 	<link href="../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 	</div>
 </nav>
 
-<div class="container main-content">
+<div class="container main-content" ng-controller="FormController">
 
 	<form>
 		<div class="form-group">
@@ -39,10 +39,11 @@
 		</div>
 
 		<div class="form-group">
-			<button class="btn btn-primary">Register
+			<button class="btn btn-primary" ng-click="register()">Register
 			</button>
 		</div>
 	</form>
+	{{formData}}
 
   <pre>
 
