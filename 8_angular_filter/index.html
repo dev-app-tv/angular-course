@@ -37,6 +37,20 @@
 				Income
 			</th>
 		</tr>
+		<tr ng-repeat="profile in profiles">
+			<td >
+				<img src="{{ profile.imageURL }}" width="40">
+			</td>
+			<td>
+				{{ profile | superStar:profile.nickname }}
+			</td>
+			<td>
+				{{ profile.birthdate | date:'dd/MM/yyyy'}}
+			</td>
+			<td>
+				{{ profile.income | number:2}}
+			</td>
+		</tr>
 	</table>
 </div>
 

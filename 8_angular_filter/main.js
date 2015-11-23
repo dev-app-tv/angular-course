@@ -40,4 +40,15 @@ app.controller('ProfileController', function ($scope) {
     },
   ]
 
+
 });
+
+app.filter('superStar', function() {
+  return function(data) {
+    var field = data.name.split(" ");
+    console.log(field);
+    return data.nickname + " "+field[0];
+  };
+});
+
+
