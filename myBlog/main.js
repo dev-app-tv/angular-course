@@ -2,21 +2,7 @@
 var app = angular.module('myApp', []);
 
 app.controller('BlogsController', function ($scope) {
-	this.contents = [
-    {
-      title: "Twin PanichSombat",
-      content: "Roofimon",
-      author: "author",
-      postDate: "2015/11/25",
-    },
-    {
-      title: "Twin PanichSombat",
-      content: "Roofimon",
-      author: "author",
-      postDate: "2015/11/25",
-    },
-  ];
-
+	this.contents = [ ];
 
   this.data = { blog: {
       title: "t",
@@ -49,7 +35,6 @@ app.controller('BlogsController', function ($scope) {
 
   $scope.data = this.data;
   $scope.contents = this.contents;
-
 
 });
 
