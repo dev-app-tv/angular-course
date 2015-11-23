@@ -19,15 +19,17 @@
 				<div class="row">
 					<div class="">
 						<div class="parent"
-						     ng-controller="ParentController">
+						     ng-controller="ParentController as p">
 							<label>
 								<input type="text"
 								       ng-model="name" />
 							</label>
-							<p>{{name}}</p>
+								<p>name: {{name}}</p>
+								<p>parent: {{p.name}}</p>
+								<p>child: {{c.name}}</p>
 
 							<div class="child"
-							     ng-controller="ChildController">
+							     ng-controller="ChildController as c">
 								<label>
 									<input type="text"
 									       ng-model="name" />
@@ -35,7 +37,9 @@
 								<button class="btn"
 								        ng-click="reset()">Reset
 								</button>
-								<p>{{name}}</p>
+								<p>name: {{name}}</p>
+								<p>parent: {{p.name}}</p>
+								<p>child: {{c.name}}</p>
 							</div>
 
 						</div>
