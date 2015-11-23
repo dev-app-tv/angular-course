@@ -9,10 +9,11 @@ app.controller('BookController' , function($scope) {
   };
 
   $scope.wishListCount = 0;
-  $scope.$watch('wishListCount',function(newValue,oldValue){
-      console.log('called '+newValue+' times');
+  var x = $scope.$watch('wishListCount',function(newValue,oldValue){
+      console.log('called '+newValue+' times (oldValue='+oldValue+')');
       if(newValue==2){
 				alert('Great! You have 2 items in your wish list. Time to buy what you love. ');
+        x();  //execute for cancel watch
 			}
 		});
 });
