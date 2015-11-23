@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<title>Controllers</title>
+	<link href="../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="main.css" rel="stylesheet">
+</head>
+
+<body ng-controller="BlogsController as b">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand"
+			   href="/">Controllers
+			</a>
+		</div>
+		,
+	</div>
+</nav>
+
+
+<div class="container main-content">
+	<input type="text" placeholder="filter"/>
+	<table>
+		<tr>
+			<th>
+				Title
+			</th>
+			<th>
+				Content
+			</th>
+			<th>
+				Author
+			</th>
+			<th>
+				Postdate
+			</th>
+		</tr>
+		<tr ng-repeat="c in contents">
+			<td>
+				{{ c.title }}
+			</td>
+			<td>
+				{{ c.content }}
+			</td>
+			<td>
+				{{ c.author }}
+			</td>
+			<td>
+				{{ c.postDate }}
+			</td>
+		</tr>
+
+	</table>
+
+
+	<br>
+	<hr>
+	<div >
+		<div class="form-group">
+			<label for="name">Title</label>
+			<input type="text"
+			       class="form-control"
+			       ng-model="b.data.blog.title"
+			       id="title">
+		</div>
+
+		<div class="form-group">
+			<label for="email">Content</label>
+			<input type="text"
+			       class="form-control"
+			       ng-model="b.data.blog.content"
+			       id="content">
+		</div>
+
+		<div class="form-group">
+			<label for="email">Content</label>
+			<input type="text"
+			       class="form-control"
+			       ng-model="b.data.blog.author"
+			       id="author">
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-primary" ng-click="postBlog(b.data.blog)">Register
+			</button>
+		</div>
+	</div>
+	
+
+</div>
+
+<script src="../libs/angular/angular.min.js"></script>
+<script src="main.js"></script>
+
+
+</body>
+</html>
