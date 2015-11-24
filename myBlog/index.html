@@ -21,7 +21,9 @@
 
 
 <div class="container main-content">
-	<input type="text" placeholder="filter"/>
+	<input type="text" placeholder="filter" ng-model="searchText"/>
+	<input type="number" placeholder="limit" ng-model="limitRow"/>
+	<hr>
 	<table>
 		<tr>
 			<th>
@@ -37,12 +39,12 @@
 				Postdate
 			</th>
 		</tr>
-		<tr ng-repeat="c in contents">
+		<tr ng-repeat="c in contents | limitTo:limitRow | orderBy:'-postDate'">
 			<td>
 				{{ c.title }}
 			</td>
 			<td>
-				{{ c.content }}
+				{{ c.preview }}
 			</td>
 			<td>
 				{{ c.author }}
@@ -54,8 +56,8 @@
 
 	</table>
 
-
 	<br>
+
 	<hr>
 	<div >
 		<div class="form-group">
