@@ -6,94 +6,26 @@
 	<link href="main.css" rel="stylesheet">
 </head>
 
-<body ng-controller="BlogsController as b">
+<body >
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand"
-			   href="/">Controllers
-			</a>
-		</div>
-		,
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	        <ul class="nav navbar-nav">
+	          <li><a ui-sref="home">Blog List</a></li>
+	          <li><a ui-sref="add">Add Blog</a></li>
+	        </ul>
+	    </div><!-- /.navbar-collapse -->
 	</div>
 </nav>
 
-
-<div class="container main-content">
-	<input type="text" placeholder="filter" ng-model="searchText.title"/>
-	<input type="number" placeholder="limit" ng-model="limitRow"/>
-	<hr>
-	<table>
-		<tr>
-			<th>
-				Title
-			</th>
-			<th>
-				Content
-			</th>
-			<th>
-				Author
-			</th>
-			<th>
-				Postdate
-			</th>
-		</tr>
-		<tr ng-repeat="c in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-postDate'">
-			<td>
-				{{ c.title }}
-			</td>
-			<td>
-				{{ c.preview }}
-			</td>
-			<td>
-				{{ c.author }}
-			</td>
-			<td>
-				{{ c.postDate }}
-			</td>
-		</tr>
-
-	</table>
-
-	<br>
-
-	<hr>
-	<div >
-		<div class="form-group">
-			<label for="name">Title</label>
-			<input type="text"
-			       class="form-control"
-			       ng-model="b.data.blog.title"
-			       id="title">
-		</div>
-
-		<div class="form-group">
-			<label for="email">Content</label>
-			<input type="text"
-			       class="form-control"
-			       ng-model="b.data.blog.content"
-			       id="content">
-		</div>
-
-		<div class="form-group">
-			<label for="email">Author</label>
-			<input type="text"
-			       class="form-control"
-			       ng-model="b.data.blog.author"
-			       id="author">
-		</div>
-
-		<div class="form-group">
-			<button class="btn btn-primary" ng-click="postBlog(b.data.blog)">Register
-			</button>
-		</div>
-	</div>
-
-
+<div class="container">
+	<div ui-view></div>
 </div>
 
+
 <script src="../libs/angular/angular.min.js"></script>
+<script src="../libs/angular-ui-ui-router/release/angular-ui-router.js"></script>
 <script src="main.js"></script>
 
 

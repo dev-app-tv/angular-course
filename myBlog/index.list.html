@@ -1,0 +1,36 @@
+<div class="container main-content" ng-controller="ListBlogsController as b">
+	<input type="text" placeholder="filter" ng-model="searchText.title"/>
+	<input type="number" placeholder="limit" ng-model="limitRow"/>
+	<hr>
+	<table>
+		<tr>
+			<th>
+				Title
+			</th>
+			<th>
+				Content
+			</th>
+			<th>
+				Author
+			</th>
+			<th>
+				Postdate
+			</th>
+		</tr>
+		<tr ng-repeat="c in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-postDate'">
+			<td>
+				{{ c.title }}
+			</td>
+			<td>
+				{{ c.preview }}
+			</td>
+			<td>
+				{{ c.author }}
+			</td>
+			<td>
+				{{ c.postDate }}
+			</td>
+		</tr>
+
+	</table>
+</div>
