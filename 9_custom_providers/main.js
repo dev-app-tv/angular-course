@@ -1,10 +1,13 @@
 
 var app = angular.module('myApp', []);
 
-angular.module('myApp').controller('TestController', function(helloService1){
-  helloService1.sayHello('AngularJS');
-
-});
+angular.module('myApp').controller('TestController', 
+  function(helloService1, helloService2, greet){
+    helloService1.sayHello('AngularJS');
+    helloService2.echo('echo AngularJS');
+    greet("hola");
+  }
+);
 
 // ================= service =================
 angular.module('myApp').service('helloService1',function($timeout){
