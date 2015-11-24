@@ -5,6 +5,8 @@
 	<table>
 		<tr>
 			<th>
+			</th>
+			<th>
 				Title
 			</th>
 			<th>
@@ -17,20 +19,22 @@
 				Postdate
 			</th>
 		</tr>
-		<tr ng-repeat="c in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-postDate'">
+		<tr ng-repeat="data in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-postDate'">
 			<td>
-				{{ c.title }}
+				<a ui-sref="edit" ng-click="select(data)">edit</a>
 			</td>
 			<td>
-				{{ c.preview }}
+				{{ data.title }}
 			</td>
 			<td>
-				{{ c.author }}
+				{{ data.preview }}
 			</td>
 			<td>
-				{{ c.postDate }}
+				{{ data.author }}
+			</td>
+			<td>
+				{{ data.postDate }}
 			</td>
 		</tr>
-
 	</table>
 </div>

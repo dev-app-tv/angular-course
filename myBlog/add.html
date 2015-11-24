@@ -1,0 +1,34 @@
+<br>
+<h1>Add</h1>
+<br>
+<div ng-controller="BlogsController as b">
+	<div class="form-group">
+		<label for="name">Title</label>
+		<input type="text"
+		       class="form-control"
+		       ng-model="b.data.title"
+		       id="title">
+	</div>
+
+	<div class="form-group">
+		<label for="email">Content</label>
+		<input type="text"
+		       class="form-control"
+		       ng-model="b.data.content"
+		       id="content">
+	</div>
+
+	<div class="form-group">
+		<label for="email">Author</label>
+		<input type="text"
+		       class="form-control"
+		       ng-model="b.data.author"
+		       id="author">
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" ng-click="postBlog(b.data)">add
+		</button>
+	</div>
+
+</div>
