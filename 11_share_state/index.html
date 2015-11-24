@@ -25,8 +25,8 @@
 		</div>
     <div class="col-md-6" ng-controller="ProfileDetailController">
       <form ng-submit="update" >
-        Name: <input type="text" ng-model="profileService.selectedProfile.name" ng-model-options="{ updateOn: 'submit' }">
-        Birth Date: <input type="text" ng-model="profileService.selectedProfile.birthdate" ng-model-options="{ updateOn: 'submit' }">
+        Name: <input type="text" ng-model="profileService.name" ng-model-options="{ updateOn: 'submit' }">
+        Birth Date: <input type="text" ng-model="profileService.birthdate" ng-model-options="{ updateOn: 'submit' }">
         <input type="submit" value="Update" class="btn-primary">
       </form>
 		</div>

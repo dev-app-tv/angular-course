@@ -1,19 +1,7 @@
 var app = angular.module('myApp', []);
 
-app.controller('ProfileListController', function ($scope, profileService) {
-	$scope.profiles = profileService.profiles;
-
-	$scope.edit = function(selectedProfile) {
-		profileService.selectedProfile = selectedProfile;
-	}
-});
-
-app.controller('ProfileDetailController', function ($scope, profileService) {
-	$scope.profileService = profileService;
-});
-
-app.service('profileService', function() {
-	this.profiles = [
+app.controller('ProfileListController', function ($scope, $rootScope) {
+	$scope.profiles = [
     {
       name: "Twin PanichSombat",
       birthdate: new Date(1975, 3, 3),
@@ -36,5 +24,16 @@ app.service('profileService', function() {
     },
   ];
 
-	this.selectedProfile = null;
-})
+	$scope.edit = function(selectedProfile) {
+    $rootScope.$broadcast('editEvent', selectedProfile);
+	}
+});
+
+
+
+app.controller('ProfileDetailController', function ($scope) {
+  $scope.$on('editEvent', function(event, selectedProfile) {
+    $scope.profileService = selectedProfile;
+  });
+});
+
