@@ -38,28 +38,25 @@ app.service('BlogService',function() {
     return this.selectecItem;
   }
 
-});
+  this.updateBlog = updateBlog;
+  this.createBlog = createBlog;
 
-app.controller('BlogsController', function($scope, BlogService, $location) {
-  var init = {
-      title: "book of ",
-      content: "content on ",
-      author: "author ",
-      postDate: ""
-  };
-
-  this.data = init;
-
-  $scope.postBlog = function(dat) {
-    var blog = createBlog(dat);
-    BlogService.add(blog);
-    $location.path("/home");
-  };
-
-  function createBlog(dat) {
+  function updateBlog(dat) {
     var now = new Date();
     dat.postDate = now;
     dat.preview = dat.content.substring(0, 10) + "...";
+    return {
+      title: dat.title,
+      content: dat.content,
+      preview: dat.preview,
+      author: dat.author,
+      postDate: dat.postDate
+    }
+  }
+
+  function createBlog(dat) {
+    var now = new Date();
+    dat = updateBlog(dat)
     return {
       title: dat.title + now,
       content: dat.content + now,
@@ -71,10 +68,29 @@ app.controller('BlogsController', function($scope, BlogService, $location) {
 
 });
 
+app.controller('BlogsController', function($scope, BlogService, $location) {
+  var init = {
+      title: "book of ",
+      content: "content on ",
+      author: "author ",
+      postDate: ""
+  };
+
+  $scope.data = init;
+
+  $scope.add = function(dat) {
+    var blog = BlogService.createBlog(dat);
+    BlogService.add(blog);
+    $location.path("/home");
+  };
+
+});
+
 app.controller('EditController', function($scope, BlogService, $location) {
   $scope.data = { };
 
   $scope.save = function(data) {
+    BlogService.updateBlog(data);
     $location.path("/home");
   }
 
