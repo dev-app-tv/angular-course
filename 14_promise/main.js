@@ -1,17 +1,31 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
 
-app.controller('PromiseController', function ($timeout, $scope) {
-	$scope.value = "Hello world"
+app.controller('PromiseController', function ($timeout, $scope, $q) {
+  var kfcOfficer = $q.defer();
 
-	$timeout(function() {
-		$scope.value = "Hello AngularJS!";
-		$timeout(function() {
-			$scope.value = "Hello EmberJS!";
-			$timeout(function() {
-				$scope.value = "Hello KnockoutJS!";
-			}, 3000);
-		}, 3000);
-	}, 3000);
+  console.log("kfcOfficer:preparing");
+  var order = $timeout(function() {
+    console.log("kfcOfficer:cooking done.");
+    kfcOfficer.resolve("buffalo wing.");
+  },5000);
+
+  var customer = kfcOfficer.promise;
+
+  customer.then(eatChicken, cancelOrder);
+
+  $scope.stop = function() {
+    clearTimeout(order);
+    kfcOfficer.reject("cancel order");
+  };
+
+  function eatChicken(data){
+      console.info("customer:yummy.");
+  }
+
+  function cancelOrder(data){
+      console.error("customer: "+data);
+    }
+
 });
 
 angular.module('myApp').controller('ModalController', function($scope, $uibModal) {
