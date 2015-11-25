@@ -4,8 +4,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/home",
-      templateUrl: "list.html",
-      controller: "ListBlogsController"
+      templateUrl: "list.html"
     })
     .state('add', {
       url: "/add",
@@ -29,7 +28,6 @@ app.service('BlogService',function($http) {
   }
 
   this.add = function(data) {
-    // this.posts.push(data);
     return $http.post("http://localhost:4000/blogs/", data);
   }
 
