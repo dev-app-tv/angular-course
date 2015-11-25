@@ -20,16 +20,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
 
 app.service('BlogService',function($http) {
-  this.contents = [];
+  this.posts = [];
 
-  this.getContents = function() {
+  this.getposts = function() {
     return $http.get("http://localhost:4000/blogs/").then(function(resp) {
       return resp.data;
     });
   }
 
   this.add = function(data) {
-    this.contents.push(data);
+    // this.posts.push(data);
+    return $http.post("http://localhost:4000/blogs/", data);
   }
 
   this.select = function(data) {
@@ -45,14 +46,14 @@ app.service('BlogService',function($http) {
 
   function updateBlog(dat) {
     var now = new Date();
-    dat.postDate = now;
-    dat.preview = dat.content.substring(0, 10) + "...";
+    dat.timestamp = now;
+    dat.preview = dat.post.substring(0, 10) + "...";
     return {
       title: dat.title,
-      content: dat.content,
+      post: dat.post,
       preview: dat.preview,
       author: dat.author,
-      postDate: dat.postDate
+      timestamp: dat.timestamp
     }
   }
 
@@ -61,10 +62,10 @@ app.service('BlogService',function($http) {
     dat = updateBlog(dat)
     return {
       title: dat.title + now,
-      content: dat.content + now,
+      post: dat.post + now,
       preview: dat.preview,
       author: dat.author + now,
-      postDate: dat.postDate
+      timestamp: dat.timestamp
     };
   }
 
@@ -73,17 +74,22 @@ app.service('BlogService',function($http) {
 app.controller('BlogsController', function($scope, BlogService, $location) {
   var init = {
       title: "book of ",
-      content: "content on ",
+      post: "post on ",
       author: "author ",
-      postDate: ""
+      timestamp: ""
   };
 
   $scope.data = init;
 
   $scope.add = function(dat) {
     var blog = BlogService.createBlog(dat);
-    BlogService.add(blog);
-    $location.path("/home");
+    // BlogService.add(blog);
+    // $location.path("/home");
+    BlogService.add(blog).then(function(resp) {
+      console.info("add success.");
+      $location.path("/home");
+    });
+
   };
 
 });
@@ -107,7 +113,7 @@ app.controller('EditController', function($scope, BlogService, $location) {
 app.controller('ListBlogsController', function($scope, BlogService) {
   $scope.limitRow = 5;
 
-  BlogService.getContents().then(
+  BlogService.getposts().then(
     function(data) {
       $scope.contents = data;
     }
