@@ -39,6 +39,10 @@ app.service('BlogService',function($http) {
     return this.selectecItem;
   }
 
+  this.update = function(data) {
+    return $http.put("http://localhost:4000/blogs/"+data.id, data);
+  }
+
   this.updateBlog = updateBlog;
   this.createBlog = createBlog;
 
@@ -92,8 +96,10 @@ app.controller('EditController', function($scope, BlogService, $location) {
   $scope.data = { };
 
   $scope.save = function(data) {
-    BlogService.updateBlog(data);
-    $location.path("/home");
+    BlogService.update(data).then(function(resp) {
+      $location.path("/home");
+    });
+
   }
 
   $scope.get = function() {
