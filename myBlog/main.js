@@ -45,11 +45,9 @@ app.service('BlogService',function($http) {
   function updateBlog(dat) {
     var now = new Date();
     dat.timestamp = now;
-    dat.preview = dat.post.substring(0, 10) + "...";
     return {
       title: dat.title,
       post: dat.post,
-      preview: dat.preview,
       author: dat.author,
       timestamp: dat.timestamp
     }
@@ -69,7 +67,7 @@ app.service('BlogService',function($http) {
 
 });
 
-app.controller('BlogsController', function($scope, BlogService, $location) {
+app.controller('BlogsController', function($scope, BlogService, $location, $state) {
   var init = {
       title: "book of ",
       post: "post on ",
@@ -81,11 +79,9 @@ app.controller('BlogsController', function($scope, BlogService, $location) {
 
   $scope.add = function(dat) {
     var blog = BlogService.createBlog(dat);
-    // BlogService.add(blog);
-    // $location.path("/home");
     BlogService.add(blog).then(function(resp) {
-      console.info("add success.");
-      $location.path("/home");
+      // $location.path("/home");
+      $state.go("home")
     });
 
   };
@@ -119,5 +115,12 @@ app.controller('ListBlogsController', function($scope, BlogService) {
 
   $scope.select = function(data) {
     BlogService.select(data);
+  };
+});
+
+app.filter('preview', function() {
+  return function(data) {
+    var preview = data.substring(0, 10) + "...";
+    return preview;
   };
 });
