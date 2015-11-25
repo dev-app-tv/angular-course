@@ -19,11 +19,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
 })
 
-app.service('BlogService',function() {
+app.service('BlogService',function($http) {
   this.contents = [];
 
   this.getContents = function() {
-    return this.contents;
+    return $http.get("http://localhost:4000/blogs/").then(function(resp) {
+      return resp.data;
+    });
   }
 
   this.add = function(data) {
@@ -104,7 +106,12 @@ app.controller('EditController', function($scope, BlogService, $location) {
 
 app.controller('ListBlogsController', function($scope, BlogService) {
   $scope.limitRow = 5;
-  $scope.contents = BlogService.getContents();
+
+  BlogService.getContents().then(
+    function(data) {
+      $scope.contents = data;
+    }
+  );
 
   $scope.select = function(data) {
     BlogService.select(data);

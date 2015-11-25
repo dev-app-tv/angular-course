@@ -19,7 +19,7 @@
 				Postdate
 			</th>
 		</tr>
-		<tr ng-repeat="data in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-postDate'">
+		<tr ng-repeat="data in contents | filter:searchText:strict | limitTo:limitRow | orderBy:'-timestamp'">
 			<td>
 				<a ui-sref="edit" ng-click="select(data)">edit</a>
 			</td>
@@ -27,13 +27,13 @@
 				{{ data.title }}
 			</td>
 			<td>
-				{{ data.preview }}
+				{{ data.post }}
 			</td>
 			<td>
 				{{ data.author }}
 			</td>
 			<td>
-				{{ data.postDate }}
+				{{ data.timestamp }}
 			</td>
 		</tr>
 	</table>
